@@ -1,0 +1,16 @@
+services:
+  database:
+    image: 'postgres:latest'
+    container_name: books_online_db
+    ports:
+      - 5432:5432
+    networks:
+      - books-online-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: books_online_db
+
+networks:
+  books-online-network:
+    driver: bridge
