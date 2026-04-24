@@ -1,0 +1,422 @@
+{
+  "info": {
+    "_postman_id": "60db2738-d062-4d5c-bd6e-be432a047134",
+    "name": "NGSD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28251933"
+  },
+  "item": [
+    {
+      "name": "Get Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8000",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"TestUser\",\n    \"email\": \"testuser@example.com\",\n    \"password\": \"testuser\",\n    \"admin\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/auth/register",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "auth",
+            "register"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"admin\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/auth/login",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "auth",
+            "login"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Product Add",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "42c5454c-ca36-43aa-82e4-543aff17dd2e",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"E-Commerce Done Right\",\n    \"description\": \"Hardcover Book\",\n    \"price\": 30.54,\n    \"inventory\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/products/add",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "products",
+            "add"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All products",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "42c5454c-ca36-43aa-82e4-543aff17dd2e",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"E-Commerce Done Right\",\n    \"description\": \"Hardcover Book\",\n    \"price\": 30.54,\n    \"inventory\": 10\n}"
+        },
+        "url": {
+          "raw": "localhost:8000/products/all",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "products",
+            "all"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Product by Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "42c5454c-ca36-43aa-82e4-543aff17dd2e",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8000/products/1",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "All orders",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "6603c227-fb1b-42f9-8f4c-47bdbebf3aea",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"admin\"\n}"
+        },
+        "url": {
+          "raw": "localhost:8000/orders/all",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "orders",
+            "all"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "ef788c96-aabe-4ea8-bdaa-934712dc7436",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "localhost:8000/orders/new",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "orders",
+            "new"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add product to order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "42c5454c-ca36-43aa-82e4-543aff17dd2e",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\n    \"basket\": [\n        {\n        \"product_id\": 1,\n        \"quantity\": 1\n    },\n    {\n        \"product_id\" :2,\n        \"quantity\": 1\n    }\n    ]\n}  \n    \n    \n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/orders/1/add_products",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "orders",
+            "1",
+            "add_products"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Inventory",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "42c5454c-ca36-43aa-82e4-543aff17dd2e",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"product_id\":2,\n    \"quantity\": 1\n}  \n    \n    \n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8000/products/add_inventory",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "products",
+            "add_inventory"
+          ],
+          "query": [
+            {
+              "key": "email",
+              "value": "admin@example.com",
+              "disabled": true
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

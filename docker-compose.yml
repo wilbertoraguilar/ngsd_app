@@ -11,6 +11,16 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: books_online_db
 
+  rabbitmq:
+    image: 'rabbitmq:management'
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+
 networks:
   books-online-network:
     driver: bridge
