@@ -5,7 +5,7 @@
       "name": "Poetry Debug",
       "type": "debugpy",
       "request": "launch",
-      "program": "/Users/A200240410/development/NGSD/books-online/src/books_online/api.py",
+      "program": "/Users/A200240410/test/ngsd_app/src/books_online/api.py",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}",
       "env": {
