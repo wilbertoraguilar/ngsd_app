@@ -16,17 +16,17 @@
     3. Alembic
         Per one of the requirements, in which management changes specifications constantly, being able to manage the database is of extreme importance. This includes progressive migrations and the ability to roll back to previous state with one command.
 
-```batch
+
 alembic upgrade head
 alembic revision -m "add order_status initial data"
 alembic downgrade -1
-```
+
     4. Docker:
         The containers needed for deploying the application are executable using docker-compose
 
-```batch
+
 docker-compose up -d
-```
+
     Docker will then initialize the required (postgres, rabbitmq) containers to run the application,
 
     5. Celery:
