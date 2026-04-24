@@ -1,6 +1,7 @@
 
 from books_online.database import SessionLocal
 from books_online.orders.model import Order, OrderStatus
+from books_online.products.model import Product
 
 
 db = SessionLocal()
@@ -36,3 +37,29 @@ def create_order_line(order_line):
 
 def get_first_status():
     return db.query(OrderStatus).order_by(OrderStatus.id).first()
+
+def update_product_inventory(product_id: int, quantity: int):
+    product = db.query(Product).filter_by(id=product_id).first()
+    if product:
+        if product.inventory < quantity: # type: ignore
+            return False
+        product.inventory -= quantity # type: ignore
+        db.commit()
+        return True
+    return False
+
+def update_order_status(order_id: int):
+    order = db.query(Order).filter_by(id=order_id).first()
+    if order:
+        status_list = db.query(OrderStatus).order_by(OrderStatus.id).all()
+        last = order.status_id
+        is_last = False
+        for status in status_list:
+            if is_last:
+                order.status_id = status.id
+                break
+            if status.id == order.status_id: # type: ignore
+                is_last = True
+        db.commit()
+        return True
+    return False

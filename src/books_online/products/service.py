@@ -20,4 +20,12 @@ def get_product_by_id(product_id: int):
 def add_product(product: Product):
     return create_product(db,product)
 
+def add_product_inventory(product_id: int, quantity: int):
+    product = db.query(Product).filter_by(id=product_id).first()
+    if product:
+        product.inventory += quantity # type: ignore
+        db.commit()
+        return True
+    return False
+
 
