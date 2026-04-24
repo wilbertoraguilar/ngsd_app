@@ -27,3 +27,8 @@ alembic downgrade -1
 ```batch
 docker-compose up -d
 ```
+    Docker will then initialize the required (postgres, rabbitmq) containers to run the application,
+
+    5. Celery:
+        I am including the possibility to delegate the order process, specially the order definition, which requires the most work, to one or multiple workers using Celery and Rabbitmq as a broker. This will distribute the workload between different nodes or servers, and the requirement of scalability can be met.
+
