@@ -43,8 +43,8 @@ async def add_product_to_order(request: Request, order_id: int, data: dict):
     order = get_order_by_id(order_id)
     if not order:
         return {"error": "Order not found"}
-    # process_basket.delay(order,data.get("basket", []))
-    process_basket(order,data.get("basket", []))
+    process_basket.delay(order_id,data.get("basket"))
+    #process_basket(order,data.get("basket")
 
     return {"message": "Products added to order successfully for order " + str(order.id)}
 

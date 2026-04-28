@@ -8,9 +8,8 @@ WORKDIR /app
 COPY . .
 RUN rm -rf webapp
 RUN rm -rf .env
-RUN mv .env_container .env
+RUN mv worker/.env_container .env
 RUN rm -rf alembic.ini
-RUN mv alembic_container.ini alembic.ini
+RUN mv worker/alembic_container.ini alembic.ini
 RUN poetry install
-EXPOSE 8000
-
+CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]

@@ -43,6 +43,18 @@ services:
       - database
       - rabbitmq
       - redis
+    command: poetry run start
+    networks:
+      - bo-network
+
+  worker:
+    build: .
+    container_name: books_online_worker
+    depends_on:
+      - backend
+      - rabbitmq
+      - redis
+    command: .venv/bin/celery -A books_online.orders.tasks worker --loglevel=info
     networks:
       - bo-network
 
