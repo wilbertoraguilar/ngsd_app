@@ -19,13 +19,16 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.create_table(
-        'token',
-        sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('user_id', sa.Integer, sa.ForeignKey("user.id")),
-        sa.Column('token', sa.String(128), nullable=False, unique=True),
-        sa.Column('valid_until', sa.DateTime, nullable=False)
-    )
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if 'token' not in inspector.get_table_names():
+        op.create_table(
+            'token',
+            sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
+            sa.Column('user_id', sa.Integer, sa.ForeignKey("user.id")),
+            sa.Column('token', sa.String(128), nullable=False, unique=True),
+            sa.Column('valid_until', sa.DateTime, nullable=False)
+        )
 
 
 

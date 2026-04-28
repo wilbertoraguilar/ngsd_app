@@ -19,14 +19,17 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.create_table(
-        'product',
-        sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('name', sa.String, nullable=False),
-        sa.Column('description', sa.String, nullable=False),
-        sa.Column('price', sa.Float, nullable=False),
-        sa.Column('inventory', sa.Integer, nullable=False)
-    )
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if 'product' not in inspector.get_table_names():
+        op.create_table(
+            'product',
+            sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
+            sa.Column('name', sa.String, nullable=False),
+            sa.Column('description', sa.String, nullable=False),
+            sa.Column('price', sa.Float, nullable=False),
+            sa.Column('inventory', sa.Integer, nullable=False)
+        )
 
 
 def downgrade() -> None:

@@ -19,14 +19,17 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    op.create_table(
-        'order_line',
-        sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('product_id', sa.Integer, sa.ForeignKey("product.id"), nullable=False),
-        sa.Column('quantity', sa.Integer, nullable=False),
-        sa.Column('subtotal', sa.Float, nullable=False),
-        sa.Column('order_id', sa.Integer, sa.ForeignKey("order.id"), nullable=False),
-    )
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if 'order_line' not in inspector.get_table_names():
+        op.create_table(
+            'order_line',
+            sa.Column('id', sa.Integer, primary_key=True, autoincrement=True),
+            sa.Column('product_id', sa.Integer, sa.ForeignKey("product.id"), nullable=False),
+            sa.Column('quantity', sa.Integer, nullable=False),
+            sa.Column('subtotal', sa.Float, nullable=False),
+            sa.Column('order_id', sa.Integer, sa.ForeignKey("order.id"), nullable=False),
+        )
 
 
 def downgrade() -> None:
