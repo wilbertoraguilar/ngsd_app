@@ -218,3 +218,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Node modules
+webapp/node_modules/
+# Logs
+*.log
+# Build output
+webapp/dist/
+webapp/temp/
+# Editor settings
+vscode/
+idea/
+# Environment files
+env
+env.local
+env.*.local
+# System files
+DS_Store
+# Test coverage
+coverage/
+# Optional: Ignore specific files or folders
+docs/_book/
+test/

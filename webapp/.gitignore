@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+# Logs
+*.log
+# Build output
+dist/
+temp/
+# Editor settings
+vscode/
+idea/
+# Environment files
+env
+env.local
+env.*.local
+# System files
+DS_Store
+# Test coverage
+coverage/
+# Optional: Ignore specific files or folders
+docs/_book/
+test/
