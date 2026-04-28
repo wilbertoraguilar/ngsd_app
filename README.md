@@ -11,29 +11,31 @@ For the project I selected the following technology stack:
 
 - Postgresql
 
-        Basic relational database, with the capacity to support the concurrency that is expected.
+     Basic relational database, with the capacity to support the concurrency that is expected.
 
 - SqlAlchemy
 
-        All models and db interactions are done using sqlalchemy.
+     All models and db interactions are done using sqlalchemy.
 
 - Alembic
 
-        Per one of the requirements, in which management changes specifications constantly, being able to manage the database is of extreme importance. This includes progressive migrations and the ability to roll back to previous state with one command.
+     Per one of the requirements, in which management changes specifications constantly, being able to manage the database is of extreme importance. This includes progressive migrations and the ability to roll back to previous state with one command.
 
 - Docker:
-        The containers needed for deploying the application are executable using docker-compose
+     The containers needed for deploying the application are executable using docker-compose
 
 
-    Docker will then initialize the required (postgres, rabbitmq) containers to run the application,
+    Docker will then initialize the required (postgres, rabbitmq, redis, frontend, backend and one worker) containers to run the application. More workers can be added and deployed for scalability.
+
+    ![Containers](img/containers.png)
 
 
 - Celery:
-        I am including the possibility to delegate the order process, specially the order definition, which requires the most work, to one or multiple workers using Celery and Rabbitmq as a broker. This will distribute the workload between different nodes or servers, and the requirement of scalability can be met.My solution uses Rabbitmq as a broker and Redis as a backend.
+   I am including the possibility to delegate the order process, specially the order definition, which requires the most work, to one or multiple workers using Celery and Rabbitmq as a broker. This will distribute the workload between different nodes or servers, and the requirement of scalability can be met.My solution uses Rabbitmq as a broker and Redis as a backend.
 
 ## Prerequisites
 
-        A working Docker installation (including docker-compose)
+A working Docker installation (including docker-compose)
 
 ## Setup
 
@@ -51,6 +53,12 @@ Backend is reachable at:
 
 http://localhost:8000
 
+![Frontend](img/front.png)
+
 A postman collection is available to test the backend.
 
 NGSD.postman_collection.json
+
+![Postman](img/postman.png)
+
+In order to test the endpoints, you must recover a login token to be used for authentication in the rest of the API, with the exception of the auth endpoints, register and login.
