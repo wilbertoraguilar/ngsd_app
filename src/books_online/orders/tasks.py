@@ -1,12 +1,13 @@
 
 
-# from celery import Celery
-
+from celery import Celery
+import os
 from books_online.orders.model import Order, OrderLine
 from books_online.orders.service import create_order_line
+from books_online.products.service import get_product_by_id, update_product_inventory
 
 
-# celery_app = Celery('tasks', broker='amqp://admin:admin@localhost:5672/bo_vhost', backend='redis://:admin@localhost:6379/0')
+celery_app = Celery('tasks', broker=os.getenv("CELERY_BROKER_URL"), backend=os.getenv("CELERY_BACKEND_URL"))
 # celery_app.conf.broker_transport_options = {
 #     'visibility_timeout': 3600,
 #     'max_connections': 10,
@@ -14,7 +15,7 @@ from books_online.orders.service import create_order_line
 #     'retry_on_timeout': True
 # }
 
-# @celery_app.task
+@celery_app.task
 def process_basket(order: Order,basket: list):
     for item in basket:
         product = get_product_by_id(item.get("product_id")) # type: ignore
