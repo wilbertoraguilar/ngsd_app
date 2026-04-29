@@ -8,8 +8,15 @@ import config from "../config";
 import {useRouter} from "vue-router"
 // import Pagination from '../components/Pagination.vue';
 
+
+
 const store = useStore();
 const router = useRouter();
+
+if(store.state.token == ''){
+  store.commit("chgActiveTab", 'login');
+  router.push('/login');
+}
 
 const userStatus = computed(() => {
   return store.state.userStatus;
@@ -41,7 +48,7 @@ const brandFilter = ref("all")
 // }
 
 axios
-    .get("http://" + config.apiServer + ":" + config.port + "/api/products")
+    .get("http://" + config.apiServer + ":" + config.port + "/products/all")
     .then((res) => {
       // console.log(res.data.product_list);
       const productList = res.data.product_list;

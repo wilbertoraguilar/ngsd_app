@@ -18,12 +18,19 @@ const activeTab = computed(() => {
   return store.state.activeTab;
 });
 
+const token = computed(() => {
+  return store.state.token;
+})
+
 //const activeTab = ref("shop");
 
 const changeTab = (tab: string) => {
   store.commit("chgActiveTab", tab);
 };
 
+if(token.value == '') {
+  changeTab('login');
+}
 // const query_token = "http://" + config.apiServer + ":" + config.port + "/api/current_user";
 // axios.get(query_token,{headers:{'Authorization':"Bearer " + localStorage.getItem('Authorization')}}).then((res) => {
 //   console.log(res.data);
@@ -45,6 +52,9 @@ const changeTab = (tab: string) => {
 </script>
 
 <template>
+  <p>
+    {{ activeTab }}
+  </p>
   <div class="mb-24">
     <router-view class=""/>
   </div>

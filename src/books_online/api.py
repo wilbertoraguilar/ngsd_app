@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from dotenv import load_dotenv
 import os
@@ -8,6 +9,22 @@ from books_online.auth.utils import is_token_user_admin, is_token_valid
 
 app = FastAPI()
 load_dotenv()
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://books_online_frontend",
+    "http://books_online_frontend:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"]
+)
 
 # Import routers
 from books_online.auth.router import router as auth_router

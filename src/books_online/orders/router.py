@@ -66,6 +66,4 @@ async def update_order_status_endpoint(request: Request, order_id: int):
         return JSONResponse(status_code=status.HTTP_403_FORBIDDEN, content={"error": "Only admin users can update order status"})
         return {"error": "Only admin users can update order status"}
     status_updated = update_order_status(order_id)
-    if not status_updated:
-        return {"error": "Failed to update order status"}
-    return {"message": "Order status updated successfully"}
+    return {"message": "Order status updated successfully to " + str(status_updated)}

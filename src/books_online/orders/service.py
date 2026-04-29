@@ -57,8 +57,8 @@ def update_order_status(order_id: int):
             if status.id == order.status_id:  # type: ignore
                 is_last = True
         db.commit()
-        return True
-    return False
+        return order.status_id
+    return 0
 
 def remove_order(order_id: int):
     order = db.query(Order).filter_by(id=order_id).first()

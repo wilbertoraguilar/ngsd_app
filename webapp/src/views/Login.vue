@@ -15,7 +15,7 @@ const pid = route.params.pid
 
 const login = () => {
 
-  const query1 = "http://" + config.apiServer + ":" + config.port + "/api/login_check/"
+  const query1 = "http://" + config.apiServer + ":" + config.port + "/auth/login/"
   axios
       .post(query1,
           {
@@ -24,21 +24,24 @@ const login = () => {
           }).then((res) => {
     if (res.data.status === 'success') {
       console.log(email.value + " login successfully")
-      store.commit('chgUser', {
-        accId: res.data.uuid,
-        userEmail: email.value,
-        userName: email.value.split('@')[0]
-      })
-      if (res.data.type === 'vendor') {
-        store.commit('chgStatus', 'vendor')
-      } else {
-        store.commit('chgStatus', 'active')
+      store.commit('chgToken'), {
+        token: res.data.token
       }
-      if (pid === undefined){
-        router.push('/')
-      }else{
-        router.push('/product/' + pid)
-      }
+      // store.commit('chgUser', {
+      //   accId: res.data.uuid,
+      //   userEmail: email.value,
+      //   userName: email.value.split('@')[0]
+      // })
+      // if (res.data.type === 'vendor') {
+      //   store.commit('chgStatus', 'vendor')
+      // } else {
+      //   store.commit('chgStatus', 'active')
+      // }
+      // if (pid === undefined){
+      //   router.push('/')
+      // }else{
+      //   router.push('/product/' + pid)
+      // }
     } else {
       alert(res.data.status)
     }

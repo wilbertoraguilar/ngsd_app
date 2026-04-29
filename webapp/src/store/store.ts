@@ -13,6 +13,7 @@ export default createStore({
     state: {
         hello: 'Vue-SPA-Quickstart',
         userStatus: 'visitor', // active vendor visitor
+        token: '',
         activeTab: '',
         viewingProduct: '',
         userEmail: '',
@@ -35,6 +36,10 @@ export default createStore({
             state.activeTab = tab;
             console.log('[debug] active tab change to ' + tab)
         },
+        chgToken(state, token) {
+            state.token = token;
+            console.log('[debug] token change to ' + token)
+        },
         chgViewingProduct(state, pid) {
             state.viewingProduct = pid;
         },
@@ -51,6 +56,7 @@ export default createStore({
             state.userEmail = '';
             state.userName = '';
             state.accId = '';
+            state.token = '';
             state.primaryAddress.addrId = '';
             state.activeTab = '';
         },

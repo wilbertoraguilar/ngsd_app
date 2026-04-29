@@ -32,4 +32,4 @@ def process_basket(order_id: int, basket: list):
         new_order_line = create_order_line(order_line)
         print("Order Line created: ", new_order_line)
         update_product_inventory(product.id, quantity)  # type: ignore
-        return True
+    return True
