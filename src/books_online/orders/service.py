@@ -59,3 +59,9 @@ def update_order_status(order_id: int):
         db.commit()
         return True
     return False
+
+def remove_order(order_id: int):
+    order = db.query(Order).filter_by(id=order_id).first()
+    if order:
+        db.delete(order)
+        db.commit()

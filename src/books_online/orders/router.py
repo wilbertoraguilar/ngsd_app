@@ -21,11 +21,8 @@ router = APIRouter()
 async def new_order(request: Request):
     user = get_token_user(request.headers.get("Authorization", ""))
     first_status = get_first_status()  # type: ignore
-    if not is_token_user_admin(request.headers.get("Authorization", "")):
-        order = Order(created_at=datetime.datetime.now(), status_id=first_status.id, user_id=user["user"].id)  # type: ignore
-        new_order = create_new_order(order)
-    else:
-        return {"error": "Admin Users cannot create orders"}
+    order = Order(created_at=datetime.datetime.now(), status_id=first_status.id, user_id=user["user"].id)  # type: ignore
+    new_order = create_new_order(order)
     return {"message": "Order created successfully", "order_id": new_order.id}
 
 
@@ -52,7 +49,7 @@ async def add_product_to_order(request: Request, order_id: int, data: dict):
     order = get_order_by_id(order_id)
     if not order:
         return {"error": "Order not found"}
-    process_basket.delay(order_id, data.get("basket"))
+    order_line = process_basket.delay(order_id, data.get("basket"))
     # process_basket(order,data.get("basket")
 
     return {
