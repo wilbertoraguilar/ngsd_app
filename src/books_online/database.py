@@ -8,6 +8,6 @@ load_dotenv()
 
 DB_URL = os.getenv("DB_URL")
 
-engine = create_engine(DB_URL) # type: ignore
+engine = create_engine(DB_URL)  # type: ignore
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

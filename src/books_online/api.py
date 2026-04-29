@@ -25,37 +25,48 @@ app.include_router(orders_router)
 NO_AUTH_PATHS = ["/", "/auth/login", "/auth/register"]
 ADMIN_PATHS = ["/products/add", "/products/add_inventory"]
 
+
 @app.middleware("http")
 async def is_authenticated(request: Request, call_next):
-    if not is_token_valid(request.headers.get("Authorization", "")) and request.url.path not in NO_AUTH_PATHS:
+    if (
+        not is_token_valid(request.headers.get("Authorization", ""))
+        and request.url.path not in NO_AUTH_PATHS
+    ):
         return JSONResponse(
-                status_code=status.HTTP_403_FORBIDDEN,
-                content={"detail": "Unauthorized"}
-            )
+            status_code=status.HTTP_403_FORBIDDEN, content={"detail": "Unauthorized"}
+        )
     response = await call_next(request)
     return response
+
 
 @app.middleware("http")
 async def is_admin(request: Request, call_next):
-    if not is_token_valid(request.headers.get("Authorization", "")) and request.url.path not in NO_AUTH_PATHS:
+    if (
+        not is_token_valid(request.headers.get("Authorization", ""))
+        and request.url.path not in NO_AUTH_PATHS
+    ):
         return JSONResponse(
-                status_code=status.HTTP_403_FORBIDDEN,
-                content={"detail": "Unauthorized"}
-            )
-    if not is_token_user_admin(request.headers.get("Authorization", "")) and request.url.path in ADMIN_PATHS:
+            status_code=status.HTTP_403_FORBIDDEN, content={"detail": "Unauthorized"}
+        )
+    if (
+        not is_token_user_admin(request.headers.get("Authorization", ""))
+        and request.url.path in ADMIN_PATHS
+    ):
         return JSONResponse(
-                status_code=status.HTTP_403_FORBIDDEN,
-                content={"detail": "Unauthorized"}
-            )
+            status_code=status.HTTP_403_FORBIDDEN, content={"detail": "Unauthorized"}
+        )
     response = await call_next(request)
     return response
 
+
 @app.get("/")
 async def read_root():
-   return "Books Online API is running"
+    return "Books Online API is running"
+
 
 def start():
-    uvicorn.run("books_online.api:app", host=os.getenv("BE_HOST"), port=int(os.getenv("BE_PORT")), reload=True) # type: ignore
+    uvicorn.run("books_online.api:app", host=os.getenv("BE_HOST"), port=int(os.getenv("BE_PORT")), reload=True)  # type: ignore
+
 
 if __name__ == "__main__":
     start()

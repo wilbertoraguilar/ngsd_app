@@ -1,7 +1,4 @@
 FROM python:3.11.2-buster
-# RUN apt-get update && apt install -y curl
-# RUN curl -sSL https://install.python-poetry.org | python
-# ENV PATH="${PATH}:/root/.local/bin"
 RUN pip install poetry
 RUN poetry config virtualenvs.in-project true
 WORKDIR /app

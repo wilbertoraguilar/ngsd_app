@@ -2,6 +2,8 @@ from books_online.database import Base, engine
 from sqlalchemy import Column, DateTime, Integer, String, Boolean, ForeignKey, Float
 from sqlalchemy.orm import Session, relationship
 from books_online.auth.model import User
+
+
 class Product(Base):
     __tablename__ = "product"
 
@@ -11,8 +13,10 @@ class Product(Base):
     price = Column(Float, nullable=False)
     inventory = Column(Integer, nullable=False)
 
+
 def get_product(db: Session, product_id: int):
     return db.query(Product).filter(Product.id == product_id).first()
+
 
 def create_product(db: Session, product: Product):
     db_product = product
@@ -20,6 +24,7 @@ def create_product(db: Session, product: Product):
     db.commit()
     db.refresh(db_product)
     return db_product
+
 
 def get_all_products(db: Session) -> list[Product]:
     return db.query(Product).all()

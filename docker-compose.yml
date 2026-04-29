@@ -10,8 +10,6 @@ services:
       POSTGRES_DB: books_online_db
     networks:
       - bo-network
-
-
   rabbitmq:
     image: rabbitmq:management
     container_name: books_online_rabbitmq
@@ -47,6 +45,8 @@ services:
     networks:
       - bo-network
 
+# Single worker for simplicity, can be scaled if needed
+
   worker:
     build: .
     container_name: books_online_worker
@@ -57,6 +57,41 @@ services:
     command: .venv/bin/celery -A books_online.orders.tasks worker --loglevel=info
     networks:
       - bo-network
+
+# For multiple workers, you can uncomment the following sections and adjust the concurrency as needed.
+
+  # worker1:
+  #   build: .
+  #   container_name: books_online_worker
+  #   depends_on:
+  #     - backend
+  #     - rabbitmq
+  #     - redis
+  #   command: .venv/bin/celery -A books_online.orders.tasks worker -l INFO --concurrency=4 -n worker1@%h
+  #   networks:
+  #     - bo-network
+
+  # worker2:
+  #   build: .
+  #   container_name: books_online_worker
+  #   depends_on:
+  #     - backend
+  #     - rabbitmq
+  #     - redis
+  #   command: .venv/bin/celery -A books_online.orders.tasks worker -l INFO --concurrency=4 -n worker2@%h
+  #   networks:
+  #     - bo-network
+
+  # worker3:
+  #   build: .
+  #   container_name: books_online_worker
+  #   depends_on:
+  #     - backend
+  #     - rabbitmq
+  #     - redis
+  #   command: .venv/bin/celery -A books_online.orders.tasks worker -l INFO --concurrency=4 -n worker3@%h
+  #   networks:
+  #     - bo-network
 
   frontend:
     build: ./webapp

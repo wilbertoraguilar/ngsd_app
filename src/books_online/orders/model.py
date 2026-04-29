@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session, relationship
 from books_online.auth.model import User
 from books_online.products.model import Product
 
+
 class OrderLine(Base):
     __tablename__ = "order_line"
 
@@ -13,6 +14,7 @@ class OrderLine(Base):
     subtotal = Column(Float, nullable=False)
     order_id = Column(Integer, ForeignKey("order.id"), nullable=False)
     order = relationship("Order", back_populates="lines")
+
 
 class OrderStatus(Base):
     __tablename__ = "order_status"
@@ -30,15 +32,17 @@ class Order(Base):
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     user = relationship("User", back_populates="orders")
 
-User.orders = relationship("Order", order_by = Order.id, back_populates = "user")
-Order.lines = relationship("OrderLine", order_by = OrderLine.id, back_populates = "order")
 
+User.orders = relationship("Order", order_by=Order.id, back_populates="user")
+Order.lines = relationship("OrderLine", order_by=OrderLine.id, back_populates="order")
 
 
 Base.metadata.create_all(engine)
 
+
 def get_order(db: Session, order_id: int):
     return db.query(Order).filter(Order.id == order_id).first()
+
 
 def create_order(db: Session, order: Order):
     db_order = order
@@ -46,6 +50,7 @@ def create_order(db: Session, order: Order):
     db.commit()
     db.refresh(db_order)
     return db_order
+
 
 def create_order_line(db: Session, order_line: OrderLine):
     db_order_line = order_line
@@ -57,4 +62,3 @@ def create_order_line(db: Session, order_line: OrderLine):
 
 def get_all_orders(db: Session) -> list[Order]:
     return db.query(Order).all()
-
