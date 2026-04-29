@@ -1,6 +1,6 @@
 from celery import Celery
 import os
-from books_online.orders.model import Order, OrderLine
+from books_online.orders.model import OrderLine
 from books_online.orders.service import create_order_line
 from books_online.products.service import get_product_by_id, update_product_inventory
 

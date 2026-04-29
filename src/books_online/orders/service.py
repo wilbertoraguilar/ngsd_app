@@ -1,6 +1,5 @@
 from books_online.database import SessionLocal
 from books_online.orders.model import Order, OrderStatus
-from books_online.products.model import Product
 
 
 db = SessionLocal()

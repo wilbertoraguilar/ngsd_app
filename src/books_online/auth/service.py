@@ -1,4 +1,3 @@
-import datetime
 import bcrypt
 from uuid import uuid4
 from books_online.auth.model import create_user, get_user, get_token, User, Token

@@ -1,13 +1,10 @@
 from fastapi import APIRouter, Request
 import datetime
-from books_online.auth.model import User
-from books_online.auth.utils import get_token_user, is_token_valid, is_token_user_admin
-from books_online.orders.model import Order, OrderLine
+from books_online.auth.utils import get_token_user, is_token_user_admin
+from books_online.orders.model import Order
 from books_online.orders.tasks import process_basket
-from books_online.products.model import Product
 from books_online.orders.service import (
     create_new_order,
-    create_order_line,
     get_all_orders,
     get_orders_by_user_id,
     get_order_by_id,
@@ -15,7 +12,6 @@ from books_online.orders.service import (
     update_order_status,
 )
 
-from books_online.products.service import get_product_by_id
 
 router = APIRouter()
 

@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from books_online.auth.service import login, register
-from books_online.auth.model import User
 
 router = APIRouter()
 

@@ -1,4 +1,4 @@
-from books_online.auth.model import User, get_token_by_token
+from books_online.auth.model import get_token_by_token
 from books_online.database import SessionLocal
 import datetime
 

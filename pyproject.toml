@@ -115,3 +115,8 @@ prepend_sys_path = [
 # executable = "ruff"
 # options = "check --fix REVISION_SCRIPT_FILENAME"
 
+
+[dependency-groups]
+dev = [
+    "pylint (>=4.0.5,<5.0.0)"
+]

@@ -1,7 +1,6 @@
-from books_online.database import Base, engine
-from sqlalchemy import Column, DateTime, Integer, String, Boolean, ForeignKey, Float
+from books_online.database import Base
+from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.orm import Session, relationship
-from books_online.auth.model import User
 
 
 class Product(Base):

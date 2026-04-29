@@ -1,12 +1,10 @@
-from urllib import request
-
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 import uvicorn
 from dotenv import load_dotenv
 import os
 
-from books_online.auth.utils import get_token_user, is_token_user_admin, is_token_valid
+from books_online.auth.utils import is_token_user_admin, is_token_valid
 
 app = FastAPI()
 load_dotenv()

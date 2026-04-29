@@ -1,3 +1,6 @@
+"""
+Database engine and session setup for the Books Online application.
+"""
 import os
 from dotenv import load_dotenv
 from sqlalchemy.ext.declarative import declarative_base

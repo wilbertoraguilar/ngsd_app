@@ -1,8 +1,7 @@
 from books_online.database import Base, engine
-from sqlalchemy import Column, DateTime, Integer, String, Boolean, ForeignKey, Float
+from sqlalchemy import Column, DateTime, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import Session, relationship
 from books_online.auth.model import User
-from books_online.products.model import Product
 
 
 class OrderLine(Base):
