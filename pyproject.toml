@@ -18,6 +18,8 @@ dependencies = [
     "databases (>=0.9.0,<0.10.0)",
     "celery (<=5.1)",
     "redis[hiredis] (>=7.4.0,<8.0.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "pytest (>=9.0.3,<10.0.0)",
 ]
 
 [tool.poetry]

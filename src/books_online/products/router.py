@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Request
+from fastapi.responses import JSONResponse
 from books_online.products.model import Product
 from books_online.products.service import (
     add_product,
@@ -17,6 +18,9 @@ async def get_products(request: Request):
 
 @router.get("/products/{product_id}")
 async def get_product(request: Request, product_id: int):
+    product = get_product_by_id(product_id)
+    if not product:
+        return JSONResponse(status_code=404, content={"detail": "Product not found"})
     return {"product": get_product_by_id(product_id)}
 
 

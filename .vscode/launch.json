@@ -21,6 +21,24 @@
       "env": {
         "PYTHONPATH": "${workspaceFolder}"
       }
-    }
+    },
+    {
+      "name": "Pytest: Debug All Tests",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["--maxfail=3", "--disable-warnings"], // Optional pytest arguments
+      "console": "integratedTerminal",
+      "justMyCode": false
+      },
+      {
+      "name": "Pytest: Debug Current File",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["${file}"], // Runs tests in the current file
+      "console": "integratedTerminal",
+      "justMyCode": false
+      }
   ]
 }

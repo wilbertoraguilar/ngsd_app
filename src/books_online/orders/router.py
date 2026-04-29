@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, status
+from fastapi.responses import JSONResponse
 import datetime
 from books_online.auth.utils import get_token_user, is_token_user_admin
 from books_online.orders.model import Order
@@ -65,6 +66,7 @@ async def update_order_status_endpoint(request: Request, order_id: int):
     if not order:
         return {"error": "Order not found"}
     if not is_token_user_admin(request.headers.get("Authorization", "")):
+        return JSONResponse(status_code=status.HTTP_403_FORBIDDEN, content={"error": "Only admin users can update order status"})
         return {"error": "Only admin users can update order status"}
     status_updated = update_order_status(order_id)
     if not status_updated:

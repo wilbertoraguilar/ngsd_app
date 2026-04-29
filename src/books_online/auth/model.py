@@ -36,11 +36,16 @@ def get_user(db: Session, email: str):
 
 
 def create_user(db: Session, user: User):
-    db_user = user
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
+    try:
+        db_user = user
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+    except Exception as e:
+        db.rollback()
+        return None
+
 
 
 def get_token(db: Session, user_id: Integer) -> Token:

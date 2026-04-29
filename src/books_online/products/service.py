@@ -49,3 +49,9 @@ def update_product_inventory(product_id: int, quantity: int):
         db.commit()
         return True
     return False
+
+def delete_test_products():
+    products = db.query(Product).filter_by(name="Test Product").all()
+    for product in products:
+        db.delete(product)
+        db.commit()

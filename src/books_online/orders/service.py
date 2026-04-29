@@ -16,7 +16,7 @@ get_db()
 
 
 def get_all_orders():
-    return db.query(Order).all()
+    return db.query(Order).order_by("id").all()
 
 
 def get_orders_by_user_id(user_id: int):
@@ -49,7 +49,6 @@ def update_order_status(order_id: int):
     order = db.query(Order).filter_by(id=order_id).first()
     if order:
         status_list = db.query(OrderStatus).order_by(OrderStatus.id).all()
-        last = order.status_id
         is_last = False
         for status in status_list:
             if is_last:
